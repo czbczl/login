@@ -1,6 +1,7 @@
 
 <template>
   <div class="login_container">
+    <!-- <img src="../assets/logo.png" alt=""> -->
     <div class="login_box">
       <div class="head_box">
         <img src="../assets/logo.png" alt />
@@ -92,7 +93,7 @@ export default {
   transform: translate(-50%, -50%);
   background-color: #fff;
 }
-img {
+.head_box img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
