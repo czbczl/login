@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -56,12 +57,47 @@ export default {
     resetLoginForm() {
       this.$refs.loginFormRef.resetFields();
     },
+    // login() {
+    //   this.$refs.loginFormRef.validate(async valid => {
+    //     if (!valid) return;
+    //     // const {data:res} = await this.$http.post("login", this.loginForm);
+    //     this.$router.push("/home");
+    //   });
+    // }
     login() {
-      this.$refs.loginFormRef.validate(async valid => {
-        if (!valid) return;
-        // const {data:res} = await this.$http.post("login", this.loginForm);
-        this.$router.push("/home");
-      });
+      var username = this.loginForm.username;
+      var password = this.loginForm.password;
+      var self = this;
+      if (username == "" || password == "") {
+        alert("帐号和密码不能为空");
+      } else {
+        //向服务器提交数据
+        axios
+          .post("http://localhost:5000/login", {
+            username: username,
+            password: password
+          })
+          .then(function(response) {
+            //成功时服务器返回 response 数据
+            // this.$router.push("/home");
+
+            // alert(response.data);
+            var st = response.data;
+            var sts = "sts";
+            if (st == sts) {
+              self.$refs.loginFormRef.validate(async valid => {
+                if (!valid) return;
+                // const {data:res} = await this.$http.post("login", this.loginForm);
+                self.$router.push("/home");
+              });
+            } else {
+              alert("用户名或密码错误！");
+            }
+          })
+          .catch(function(error) {
+            console.log(error);
+          });     
+      }
     }
   }
 };
