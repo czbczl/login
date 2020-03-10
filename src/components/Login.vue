@@ -93,10 +93,19 @@ export default {
             } else {
               alert("用户名或密码错误！");
             }
+            // self.$refs.loginFormRef.validate(async valid => {
+            //   if (!valid) {
+            //     alert("用户名胡密码错误!");
+            //   }
+            //   // const {data:res} = await this.$http.post("login", this.loginForm);
+            //   else {
+            //     self.$router.push("/home");
+            //   }
+            // });
           })
           .catch(function(error) {
             console.log(error);
-          });     
+          });
       }
     }
   }
